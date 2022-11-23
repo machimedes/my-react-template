@@ -7,11 +7,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import {ThemeProvider} from "@mui/material/styles";
 import {useState} from "react";
-import {
-  alertAppError,
-  alertHttpError,
-  formObject,
-} from "../../tools/tools";
+
 import {Avatar, Divider} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import {deepPurple} from "@mui/material/colors";
@@ -21,6 +17,8 @@ import {theme} from "../../themes/theme";
 import PersonIcon from '@mui/icons-material/Person';
 import KeyIcon from '@mui/icons-material/Key';
 import CheckIcon from '@mui/icons-material/Check';
+import {formObject} from "../../tools/tools";
+import {alertError, alertHttpError} from "../../tools/httptool/axiostool";
 
 export default function Login() {
   const [signIn, setSignIn] = useState(true);
@@ -35,7 +33,7 @@ export default function Login() {
       // 注册事件对应创建用户
       userService.createUser(registerData).then(wr => {
         console.log(wr)
-        if (alertHttpError(wr) || alertAppError(wr)) {
+        if (alertError(wr)) {
           return;
         }
         alert("注册成功")
@@ -52,8 +50,6 @@ export default function Login() {
         console.log(wr)
       })
     }
-
-
   }
 
 
@@ -104,7 +100,8 @@ export default function Login() {
                   <b> {signIn ? "Sign In" : "Register"} </b>
                 </Button>
                 {signIn &&
-                  <Link sx={{marginLeft: 2}} href="src/pages/login/Login#" underline="hover"> Forgot your password? </Link>
+                  <Link sx={{marginLeft: 2}} href="src/pages/login/Login#" underline="hover"> Forgot your
+                    password? </Link>
                 }
               </Box>
               <Box sx={{marginTop: 2, display: "flex", justifyContent: "flex-end", alignItems: "center", width: 0.5}}>

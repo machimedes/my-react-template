@@ -19,6 +19,7 @@ export const theme = createTheme({
 // palette 调色板 规定主次色系
 // spacing margin padding的最小像素
 
+// margin border padding易于计算的值
 export const baseMarginStyle = {mt: 1}
 export const baseBorderStyle = {border: 1, borderRadius: "10px"}
 export const basePaddingStyle = {p: 1}
