@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import TextField from "@mui/material/TextField";
 import {Box, Grid, Stack} from "@mui/material";
-import ValueTextField from "./ValueTextField";
+import ValueTextField from "../valuetestfield/ValueTextField";
 
 export default function InputGrid(input) {
   const ids = [0, 1, 2]

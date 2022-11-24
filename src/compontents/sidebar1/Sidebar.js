@@ -19,6 +19,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import moduleList, {moduleName} from "./data";
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 240;
 
@@ -122,17 +123,17 @@ export default function PersistentDrawerLeft() {
         {Object.entries(moduleList).map((module, index) => (
           <Box>
             <Typography key={index} variant="h5" component="h1"
-                        sx={{paddingLeft: 1, font: "Rubik Distressed"}}>
+                        sx={{paddingLeft: 1, fontFamily: "Abril Fatface"}}>
               {moduleName[module[0]]}
             </Typography>
             <List>
               {module[1].map((subModule, index) => (
-                <ListItem key={index} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                <ListItem key={index} sx={{padding: 0}}>
+                  <ListItemButton sx={{margin: 0}}>
+                    <ListItemIcon sx={{margin: 0}}>
+                      {subModule[1]}
                     </ListItemIcon>
-                    <ListItemText primary={subModule}/>
+                    <ListItemText primary={subModule[0]} sx={{margin: 0}}/>
                   </ListItemButton>
                 </ListItem>
               ))}

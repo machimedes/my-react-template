@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Box, Button, Card, Container, ThemeProvider, Typography} from "@mui/material";
 import {baseMBP, theme} from "../../themes/theme";
-import InputGrid from "../../compontents/InputGrid";
+import InputGrid from "../../compontents/inputgrid/InputGrid";
 
 const mpb = {margin: 10, border: 0, padding: 0}
 

@@ -24,3 +24,5 @@ export const baseMarginStyle = {mt: 1}
 export const baseBorderStyle = {border: 1, borderRadius: "10px"}
 export const basePaddingStyle = {p: 1}
 export const baseMBP = {...baseMarginStyle, ...baseBorderStyle, ...basePaddingStyle}
+
+export const flexCenter = {display: "flex", alignItems: "center"}
