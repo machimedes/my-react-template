@@ -21,6 +21,9 @@ import logo from "../../images/data-warehouse.png"
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import {ThemeProvider} from "@mui/material/styles";
+import AutoModeIcon from '@mui/icons-material/AutoMode';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+import AirIcon from '@mui/icons-material/Air';
 
 const Sidebar = ({children}) => {
   const menuItems = [
@@ -28,6 +31,9 @@ const Sidebar = ({children}) => {
     {path: "/dashboard", name: "Dashboard", icon: <DashboardIcon sx={{fontSize: "32px"}}/>},
     {path: "/metadata", name: "Datadata", icon: <ContentPasteSearchIcon sx={{fontSize: "35px"}}/>},
     {path: "/data-dependency", name: "Data Dependency", icon: < AccountTreeIcon sx={{fontSize: "35px"}}/>},
+    {path: "/flow", name: "Flow", icon: <AirIcon sx={{fontSize: "35px"}}/>},
+    {path: "/gravity", name: "Gravity", icon: <AutoModeIcon sx={{fontSize: "35px"}}/>},
+    {path: "/svg", name: "SVG", icon: <OpenInFullIcon sx={{fontSize: "35px"}}/>}
   ]
 
   const [isOpen, setIsOpen] = useState(true)
@@ -43,7 +49,7 @@ const Sidebar = ({children}) => {
               <Box sx={{...flexCenter, justifyContent: "center", ml: 13}}>
                 <img src={logo} alt="Logo" style={{height: 40, width: 45}}/>
               </Box>}
-            <Button onClick={toggle} sx={{...flexCenter, justifyContent: "center", ml:0,color:"black"}}>
+            <Button onClick={toggle} sx={{...flexCenter, justifyContent: "center", ml: 0, color: "black"}}>
               <MenuIcon sx={{fontSize: "35px"}}/>
             </Button>
           </Stack>
@@ -63,7 +69,7 @@ const Sidebar = ({children}) => {
 
 
         </Box>
-        <Box>{children}</Box>
+        <Box width={"100%"}>{children}</Box>
       </Box>
     </ThemeProvider>
   );

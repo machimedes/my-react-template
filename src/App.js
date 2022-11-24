@@ -9,6 +9,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/profile/Profile";
 import Metadata from "./pages/metadata/Metadata";
 import DataDependency from "./pages/datadependency/DataDependency";
+import Flow from "./pages/others/reactflow/Flow";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}> </Route>
           <Route path="/metadata" element={<Metadata/>}> </Route>
           <Route path="/data-dependency" element={<DataDependency/>}> </Route>
+          <Route path="/flow" element={<Flow/>}> </Route>
 
           <Route path="/gravity" element={<Gravity/>}/>
           <Route path="/login" element={<Login/>}> </Route>
