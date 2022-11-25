@@ -9,7 +9,8 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/profile/Profile";
 import Metadata from "./pages/metadata/Metadata";
 import DataDependency from "./pages/datadependency/DataDependency";
-import Flow from "./pages/others/reactflow/Flow";
+import CustomNodeFlow from "./pages/others/reactflow/CustomNodeFlow";
+import Flow from "./pages/others/reactflow/demo/Flow";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/metadata" element={<Metadata/>}> </Route>
           <Route path="/data-dependency" element={<DataDependency/>}> </Route>
           <Route path="/flow" element={<Flow/>}> </Route>
+          <Route path="/cflow" element={<CustomNodeFlow/>}> </Route>
 
           <Route path="/gravity" element={<Gravity/>}/>
           <Route path="/login" element={<Login/>}> </Route>
