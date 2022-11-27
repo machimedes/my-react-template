@@ -2,7 +2,6 @@ import './index.css'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Gravity from "./pages/animes/Gravity";
 import Login from "./pages/login/Login";
-import PersistentDrawerLeft from "./compontents/sidebar/Sidebar";
 import FontDisplay from "./pages/others/font/FontDisplay";
 import Sidebar from "./compontents/sidebar/Sidebar";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -11,6 +10,7 @@ import Metadata from "./pages/metadata/Metadata";
 import DataDependency from "./pages/datadependency/DataDependency";
 import CustomNodeFlow from "./pages/others/reactflow/CustomNodeFlow";
 import Flow from "./pages/others/reactflow/demo/Flow";
+import SVG from "./pages/others/svg/FontDisplay";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           <Route path="/data-dependency" element={<DataDependency/>}> </Route>
           <Route path="/flow" element={<Flow/>}> </Route>
           <Route path="/cflow" element={<CustomNodeFlow/>}> </Route>
+          <Route path="/svg" element={<SVG/>}> </Route>
 
           <Route path="/gravity" element={<Gravity/>}/>
           <Route path="/login" element={<Login/>}> </Route>
