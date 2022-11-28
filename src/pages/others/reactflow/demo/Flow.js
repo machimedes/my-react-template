@@ -5,7 +5,7 @@ import ReactFlow, {
   Background,
   useNodesState,
   useEdgesState,
-  addEdge, Position, Handle,
+  addEdge, Position, Handle, MarkerType,
 } from 'reactflow';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -13,64 +13,63 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {tables} from "./tables";
+import {tables, tl} from "./tables";
+import Box from "@mui/material/Box";
 
-const dragHandleStyle = {
-  display: 'inline-block',
-  width: 25,
-  height: 25,
-  backgroundColor: 'teal',
-  marginLeft: 5,
-  borderRadius: '50%',
-};
+const handleStyle = {style: {background: '#e57373'}}
+
+const edgeStyle = {
+  animated: true,
+  style: {stroke: "#e57373"},
+  labelBgStyle: {fill: '#FFCC00', color: '#fff', fillOpacity: 0.7},
+  markerEnd: {
+    type: MarkerType.ArrowClosed,
+    color: "red"
+  }
+}
+const rfStyle = {style: {backgroundColor: '#B8CEFF'}};
+const snapGrid = [10, 10];
 
 
 function TableNode({data}) {
 
+  const showDetail = () => {
+    alert(data.desc)
+  }
+
   return (
     <>
-      <Handle
-        type="target"
-        position={Position.Top}
-        style={{background: '#555'}}
-        isConnectable={true}
-      />
+      <Handle type="target" position={Position.Top} isConnectable={true} {...handleStyle}/>
 
-      <Card sx={{maxWidth: 345, backgroundColor: "yellow"}}>
-        <CardContent>
-          <Typography variant="body" color="text.secondary">
-            {`CATALOG: ${data.catalog}`}
-            <br/>
-            {`INSTANCE ${data.instance}`}
-            <br/>
-            {`DATABASE ${data.database}`}
-            <br/>
-            {`TABLE ${data.table}`}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">查看详细信息</Button>
-        </CardActions>
-      </Card>
+      <Box sx={{width: 300, backgroundColor: "#90caf9"}}>
+        <Typography variant="body2" color="text.secondary">
+          {`${data.id}`}
+          <br/>
+          {`${data.catalog} ${data.instance}`}
+          <br/>
+          {`${data.database}.${data.table}`}
+        </Typography>
+        <Button size="small" onClick={showDetail}>查看描述</Button>
+      </Box>
 
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        style={{background: '#555'}}
-        isConnectable={true}
-      />
+      <Handle type="source" position={Position.Bottom} isConnectable={true} {...handleStyle}/>
     </>
   );
 
 }
 
 const nodeTypes = {tableNode: TableNode};
-const initialNodes = [
-  {id: '1', position: {x: 0, y: 0}, data: tables[0]},
-  {id: '2', position: {x: 0, y: 200}, data: tables[1]},
-];
+const initialNodes = tables.map((value, index) => (
+  {
+    id: value.id, position: {x: 100 * index, y: 100 * index}, data: value, type: "tableNode"
+  }
+))
 
-const initialEdges = [{id: 'e1-2', source: '1', target: '2'}];
+
+const initialEdges = tl.map((value, index) => (
+  {id: value.st + "-" + value.tt, source: value.st, target: value.tt, ...edgeStyle}
+))
+
 
 const Flow = () => {
 
@@ -78,7 +77,6 @@ const Flow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   useEffect(() => {
-    console.log("use effect")
     setNodes(initialNodes);
     setEdges(initialEdges);
   }, [])
@@ -89,11 +87,14 @@ const Flow = () => {
       nodes={nodes}
       nodeTypes={nodeTypes}
       edges={edges}
-
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       fitView
       attributionPosition="bottom-left"
+      snapToGrid={true}
+      snapGrid={snapGrid}
+
+      {...rfStyle}
     >
       <MiniMap/>
       <Controls/>

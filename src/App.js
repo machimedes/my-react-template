@@ -10,7 +10,8 @@ import Metadata from "./pages/metadata/Metadata";
 import DataDependency from "./pages/datadependency/DataDependency";
 import CustomNodeFlow from "./pages/others/reactflow/CustomNodeFlow";
 import Flow from "./pages/others/reactflow/demo/Flow";
-import SVG from "./pages/others/svg/FontDisplay";
+import SVG from "./pages/others/svg/SVG";
+import Conflict from "./pages/others/ballconflict/Conflict";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/flow" element={<Flow/>}> </Route>
           <Route path="/cflow" element={<CustomNodeFlow/>}> </Route>
           <Route path="/svg" element={<SVG/>}> </Route>
-
+          <Route path="/conflict" element={<Conflict/>}> </Route>
           <Route path="/gravity" element={<Gravity/>}/>
           <Route path="/login" element={<Login/>}> </Route>
           <Route path="/font" element={<FontDisplay/>}/>

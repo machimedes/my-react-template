@@ -24,6 +24,7 @@ import {ThemeProvider} from "@mui/material/styles";
 import AutoModeIcon from '@mui/icons-material/AutoMode';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import AirIcon from '@mui/icons-material/Air';
+import Conflict from "../../pages/others/ballconflict/Conflict";
 
 const Sidebar = ({children}) => {
   const menuItems = [
@@ -33,7 +34,9 @@ const Sidebar = ({children}) => {
     {path: "/data-dependency", name: "Data Dependency", icon: < AccountTreeIcon sx={{fontSize: "35px"}}/>},
     {path: "/flow", name: "Flow", icon: <AirIcon sx={{fontSize: "35px"}}/>},
     {path: "/gravity", name: "Gravity", icon: <AutoModeIcon sx={{fontSize: "35px"}}/>},
-    {path: "/svg", name: "SVG", icon: <OpenInFullIcon sx={{fontSize: "35px"}}/>}
+    {path: "/svg", name: "SVG", icon: <OpenInFullIcon sx={{fontSize: "35px"}}/>},
+    {path: "/conflict", name: "Conflict", icon: <HomeIcon sx={{fontSize: "35px"}}/>}
+
   ]
 
   const [isOpen, setIsOpen] = useState(true)
