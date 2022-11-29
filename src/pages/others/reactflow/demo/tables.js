@@ -74,26 +74,132 @@ const t15 = new TableDefinition("hive", "127.0.0.1:10000", "dwd_sdk70000", "dail
 
 export const tables = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15]
 
-export const tl = [{st: "0", tt: "1"},
-  {st: "1", tt: "2"},
-  {st: "2", tt: "3"},
-  {st: "3", tt: "4"},
-  {st: "2", tt: "5"},
-  {st: "2", tt: "4"},
-  {st: "3", tt: "5"},
-  {st: "4", tt: "6"},
-  {st: "5", tt: "7"},
-  {st: "1", tt: "8"},
-  {st: "1", tt: "9"},
-  {st: "8", tt: "10"},
-  {st: "9", tt: "10"},
-  {st: "8", tt: "11"},
-  {st: "9", tt: "11"},
-  {st: "10", tt: "12"},
-  {st: "11", tt: "12"},
-  {st: "10", tt: "13"},
-  {st: "11", tt: "13"},
-  {st: "13", tt: "15"},
-  {st: "12", tt: "14"},
+const tableLinks = [{src: "0", tgt: "1"},
+  {src: "1", tgt: "2"},
+  {src: "2", tgt: "3"},
+  {src: "3", tgt: "4"},
+  {src: "2", tgt: "5"},
+  {src: "2", tgt: "4"},
+  {src: "3", tgt: "5"},
+  {src: "4", tgt: "6"},
+  {src: "5", tgt: "7"},
+  {src: "1", tgt: "8"},
+  {src: "1", tgt: "9"},
+  {src: "8", tgt: "10"},
+  {src: "9", tgt: "10"},
+  {src: "8", tgt: "11"},
+  {src: "9", tgt: "11"},
+  {src: "10", tgt: "12"},
+  {src: "11", tgt: "12"},
+  {src: "10", tgt: "13"},
+  {src: "11", tgt: "13"},
+  {src: "13", tgt: "15"},
+  {src: "12", tgt: "14"},]
+//
+// const tableLinks = [{src: "0", tgt: "1"},
+//  {src: "1", tgt: "2"},
+//  {src: "1", tgt: "3"},
+//  {src: "3", tgt: "4"},
+//  {src: "3", tgt: "5"},
+//  {src: "2", tgt: "4"},
+//  {src: "2", tgt: "5"},]
 
-]
+const nodes = []
+const inListMap = new Map()
+const outListMap = new Map()
+
+const nodesLevely = new Map()
+const nodesLevelx = new Map()
+
+for (const edge of tableLinks) {
+  const s = edge.src
+  const t = edge.tgt
+
+  if (!nodes.includes(s))
+    nodes.push(s)
+  if (!nodes.includes(t))
+    nodes.push(t)
+
+  if (inListMap.has(t)) {
+    inListMap.get(t).push(s)
+  } else {
+    inListMap.set(t, [s])
+  }
+
+  if (outListMap.has(s)) {
+    outListMap.get(s).push(t)
+  } else {
+    outListMap.set(s, [t])
+  }
+}
+
+const setNodeLevely = (node) => {
+  if (nodesLevely.get(node) !== undefined)
+    return nodesLevely.get(node)
+
+  if (!inListMap.has(node)) {
+    nodesLevely.set(node, 0)
+    return 0
+  }
+
+  const inList = inListMap.get(node)
+  let iniLevel = -1
+  for (const inNode of inList) {
+    if (nodesLevely.get(inNode) === undefined) {
+      iniLevel = Math.max(iniLevel, setNodeLevely(inNode))
+    } else {
+      iniLevel = Math.max(iniLevel, nodesLevely.get(inNode))
+    }
+  }
+  nodesLevely.set(node, iniLevel + 1)
+  return iniLevel + 1
+}
+
+for (const node of nodes) {
+  setNodeLevely(node)
+}
+
+const levelyIndexMap = new Map()
+
+const maxy = Math.max(...nodesLevely.values())
+
+
+levelyIndexMap.clear()
+for (let ly = 0; ly <= maxy; ly++) {
+  levelyIndexMap.set(ly, 0)
+}
+
+nodesLevelx.clear()
+const levelyZero4 = [...nodesLevely].filter(([k, v]) => v === 0)
+while (levelyZero4.length > 0) {
+  const node = levelyZero4.shift()
+  const nodeId = node[0]
+  const nodeLevely = node[1]
+  const tmpLevelyIndex = levelyIndexMap.get(nodeLevely)
+  nodesLevelx.set(nodeId, tmpLevelyIndex)
+  levelyIndexMap.set(nodeLevely, tmpLevelyIndex + 1)
+  console.log(levelyIndexMap)
+  const outList = outListMap.get(nodeId)
+  if (outList !== undefined) {
+    for (let outNode of outList) {
+      console.log(nodesLevelx)
+      if (!(levelyZero4.map(value => value[0]).includes(outNode) || nodesLevelx.has(outNode))) {
+        console.log(outNode + "-----" + nodesLevely.get(outNode))
+        levelyZero4.push([outNode, nodesLevely.get(outNode)])
+      }
+    }
+  }
+}
+
+const maxx = Math.max(...levelyIndexMap.values())
+
+const nodesLevelx_ = new Map([...nodesLevelx].map(([k, v]) => (
+  [k, (maxx / (levelyIndexMap.get(nodesLevely.get(k)) + 1) * (v + 1)) * (Math.random() / 10 + 1)]
+)))
+
+export {tableLinks, nodesLevelx_, nodesLevely}
+
+
+
+
+

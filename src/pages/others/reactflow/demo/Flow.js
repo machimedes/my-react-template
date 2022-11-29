@@ -13,7 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {tables, tl} from "./tables";
+import {tables, tableLinks, nodesLevely, nodesLevelx_} from "./tables";
 import Box from "@mui/material/Box";
 
 const handleStyle = {style: {background: '#e57373'}}
@@ -61,13 +61,16 @@ function TableNode({data}) {
 const nodeTypes = {tableNode: TableNode};
 const initialNodes = tables.map((value, index) => (
   {
-    id: value.id, position: {x: 100 * index, y: 100 * index}, data: value, type: "tableNode"
+    id: value.id,
+    position: {x: nodesLevelx_.get(value.id) * 500, y: nodesLevely.get(value.id) * 300},
+    data: value,
+    type: "tableNode"
   }
 ))
 
 
-const initialEdges = tl.map((value, index) => (
-  {id: value.st + "-" + value.tt, source: value.st, target: value.tt, ...edgeStyle}
+const initialEdges = tableLinks.map((value, index) => (
+  {id: value.src + "-" + value.tgt, source: value.src, target: value.tgt, ...edgeStyle}
 ))
 
 
