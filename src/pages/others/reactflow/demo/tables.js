@@ -187,13 +187,10 @@ while (levelyZero4.length > 0) {
   const tmpLevelyIndex = levelyIndexMap.get(nodeLevely)
   nodesLevelx.set(nodeId, tmpLevelyIndex)
   levelyIndexMap.set(nodeLevely, tmpLevelyIndex + 1)
-  console.log(levelyIndexMap)
   const outList = outListMap.get(nodeId)
   if (outList !== undefined) {
     for (let outNode of outList) {
-      console.log(nodesLevelx)
       if (!(levelyZero4.map(value => value[0]).includes(outNode) || nodesLevelx.has(outNode))) {
-        console.log(outNode + "-----" + nodesLevely.get(outNode))
         levelyZero4.push([outNode, nodesLevely.get(outNode)])
       }
     }
