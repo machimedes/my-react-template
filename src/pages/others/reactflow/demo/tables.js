@@ -71,8 +71,14 @@ const t14 = new TableDefinition("hive", "127.0.0.1:10000", "dwd_sdk70000", "dail
 const t15 = new TableDefinition("hive", "127.0.0.1:10000", "dwd_sdk70000", "daily_game_active_device_day",
   "游戏设备日活 总时长 修正及非修正", "15")
 
+const t16 = new TableDefinition("hive", "127.0.0.1:10000", "dwd_sdk70000", "map_game_detail_dim",
+  "地图明细 维度 游戏类型 游戏时长", "16")
 
-export const tables = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15]
+const t17 = new TableDefinition("hive", "127.0.0.1:10000", "dwd_sdk70000", "daily_map_active_day",
+  "地图日活", "17")
+
+
+export const tables = [t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17]
 
 const tableLinks = [{src: "0", tgt: "1"},
   {src: "1", tgt: "2"},
@@ -94,7 +100,10 @@ const tableLinks = [{src: "0", tgt: "1"},
   {src: "10", tgt: "13"},
   {src: "11", tgt: "13"},
   {src: "13", tgt: "15"},
-  {src: "12", tgt: "14"},]
+  {src: "12", tgt: "14"},
+  {src: "10", tgt: "16"},
+  {src: "11", tgt: "16"},
+  {src: "16", tgt: "17"},]
 //
 // const tableLinks = [{src: "0", tgt: "1"},
 //  {src: "1", tgt: "2"},
